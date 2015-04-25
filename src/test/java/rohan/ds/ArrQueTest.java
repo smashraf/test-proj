@@ -20,7 +20,7 @@ public class ArrQueTest {
     }
 
     public Object[] getArray() {
-        return new Object[] { new Object[] { new int[] { 1, 2, 2, 2, 5 }, 2, 1 },new Object[] { new int[] { }, 2, -1 } };
+        return new Object[] { new Object[] { new int[] { 1, 2, 2, 2, 5 }, 2, 1 }, new Object[] { new int[] {}, 2, -1 } };
     }
 
     @Test
@@ -36,11 +36,26 @@ public class ArrQueTest {
     public void binSrchMinTest(int[] arr, int x, int ans) {
         Assert.assertEquals(ans, arrQue.binSrchMin(arr, 0, arr.length - 1, x));
     }
-    
+
     @Test
     @Parameters(method = "getArray")
     public void binSrchMaxTest(int[] arr, int x, int ans) {
         Assert.assertEquals(3, arrQue.binSrchMax(arr, 0, arr.length - 1, 2));
+    }
+
+    public Object[] getArrayForRotation() {
+        return new Object[] {
+                new Object[] { new Integer[] { 1, 2, 3, 4, 5 }, 0, 4, 2, new Integer[] { 3, 4, 5, 1, 2 } },
+                new Object[] { new Integer[] { 1, 2, 3, 4, 5, 6 }, 0, 5, 2, new Integer[] { 3, 4, 5, 6, 1, 2 } },
+                new Object[] { new Integer[] { 1, 2, 3 }, 0, 2, 2, new Integer[] { 3,1,2 } },
+                new Object[] { new Integer[] { 1, 2, 3 }, 0, 2, 3, new Integer[] { 1,2,3 } }};
+    }
+
+    @Test
+    @Parameters(method = "getArrayForRotation")
+    public void rotateTest(Integer[] arr, int s, int e, int d, Integer[] ans) {
+        arrQue.rotate(arr, s, e, d);
+        Assert.assertArrayEquals(ans, arr);
     }
 
 }

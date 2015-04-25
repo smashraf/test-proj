@@ -72,24 +72,30 @@ public class ArrQue {
         return -1;
     }
 
-    public void rotate(Integer[] arr, int s1, int e1, int s2, int e2) {
-        int l1 = e1-s1;
-        int l2 = e2-s2; 
-        if(l1 == l2) {
-            blockSwap(arr, s1, e1, s2, e2);
+    public void rotate(Integer[] arr, int s, int e, int d) {
+        if(d>=arr.length) return;
+        if (e - s < d) {
+            swap(arr,s,e);
             return;
-        } else if(l1 <= l2) {
-            blockSwap(arr, s1, e1, e2-l1, e2);
-            rotate(arr,s1,s1+l1,s1+l1+1,e2-l1-1);
+        }
+        int a1 = s, a2 = s + d-1, b1 = s + d, b2 = e;
+        int lA = a2 - a1 + 1,lB = b2-b1 + 1;
+        if(lA == lB) {
+            blockSwap(arr,a1,a2,b1,b2);
+            return;
+        }
+        else if(lA<lB) {
+            blockSwap(arr, a1, a2, b2-lA +1, b2);
+            rotate(arr,a1,b2-lA,d);
         } else {
-            blockSwap(arr,s1,e1-l2,s2,e2);
-            rotate(arr,e1-l2+1,e1-l2+1+l1,);
+            blockSwap(arr,a1,a2-lB,b1,b2);
+            rotate(arr,a2-lB+1,b2,d);
         }
     }
 
     private void blockSwap(Integer[] arr, int s1, int e1, int s2, int e2) {
-        for (int i = s1; i <= e1; i++) {
-            swap(arr, i, i + s2);
+        for (int i = 0; i <= e1-s1; i++) {
+            swap(arr, s1+i, i + s2);
         }
     }
 
