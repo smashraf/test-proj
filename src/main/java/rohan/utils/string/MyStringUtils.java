@@ -43,7 +43,7 @@ public class MyStringUtils {
 
     public int editDist(char[] x, char[] y, char[] z, int i, int j, int k, int m, int n, int c) {
         if (j >= n)
-            return c;
+            return c + (m-i);
         if (i >= m)
             return c + (n - j);
 

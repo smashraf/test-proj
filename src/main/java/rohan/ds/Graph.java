@@ -8,9 +8,9 @@ public class Graph {
     // This is an array of lists - 1 list for each vertex representing its
     // neighbours
     // Just like int [] a is an array of integers
-    private List<Integer>[] adj;
+    public List<Integer>[] adj;
 
-    private int V  = 0;
+    public int V  = 0;
 
     // Initialize the graph
     public Graph(int V) {
