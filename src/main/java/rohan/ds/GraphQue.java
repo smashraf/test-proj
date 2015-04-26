@@ -1,6 +1,8 @@
 package rohan.ds;
 
 import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Map.Entry;
 import java.util.Queue;
 
 public class GraphQue {
@@ -34,7 +36,6 @@ public class GraphQue {
             queue.add(i);
             bfsUtil(graph, visited, queue);
         }
-
     }
 
     public void bfsUtil(Graph graph, boolean[] visited, Queue<Integer> queue) {
@@ -48,6 +49,31 @@ public class GraphQue {
                     queue.add(adjVertex);
             }
         }
+    }
+
+    public void bellmanFord(WeightedGraph graph, int start) {
+        int[] parent = new int[graph.V];
+        double[] distance = new double[graph.V];
+        for(int i=0;i<graph.V;i++) {
+            parent[i] = -1;
+            distance[i] = Double.MAX_VALUE;
+        }
+        Queue<Integer> queue = new ArrayDeque<>();
+        queue.add(start);
+        parent[start] = -1;
+        distance[start] = 0;
+        while (!queue.isEmpty()) {
+            int vertex = queue.remove();
+            for (Entry<Integer, Double> entry : graph.adj[vertex].entrySet()) {
+                if (distance[vertex] + entry.getValue() < distance[entry.getKey()]) {
+                    distance[entry.getKey()] = distance[vertex] + entry.getValue();
+                    parent[entry.getKey()] = vertex;
+                    queue.add(entry.getKey());
+                }
+            }
+        }
+        System.out.println(Arrays.toString(distance));
+        System.out.println(Arrays.toString(parent));
     }
 
 }
