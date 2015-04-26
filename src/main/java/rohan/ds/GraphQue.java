@@ -75,5 +75,13 @@ public class GraphQue {
         System.out.println(Arrays.toString(distance));
         System.out.println(Arrays.toString(parent));
     }
-
+    
+    public int countPaths(int [][]graph, int s, int d, int c) {
+        if(s==d) return c+1;
+        for(int j=0;j<graph.length;j++) {
+            
+            if(graph[s][j] == 1) c +=  countPaths(graph,j,d,c);
+        }
+        return c;
+    }
 }

@@ -43,5 +43,11 @@ public class GraphQueTest {
     public void bellmanFordTest() {
         graphQue.bellmanFord(weightedGraph, 0);
     }
+    
+    @Test
+    public void countPathsTest() {
+        int arr[][] = {{0,1,1,0,0},{1,0,1,0,1},{1,1,0,1,0},{0,0,1,0,0},{0,1,0,0,0}};
+        System.out.println(graphQue.countPaths(arr, 0, 1, 0));
+    }
 
 }
