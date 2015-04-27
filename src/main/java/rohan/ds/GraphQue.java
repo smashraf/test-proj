@@ -6,6 +6,8 @@ import java.util.Map.Entry;
 import java.util.Queue;
 
 public class GraphQue {
+    
+    public int c = 0;
 
     public void dfs(Graph graph) {
         boolean visited[] = new boolean[graph.V];
@@ -54,7 +56,7 @@ public class GraphQue {
     public void bellmanFord(WeightedGraph graph, int start) {
         int[] parent = new int[graph.V];
         double[] distance = new double[graph.V];
-        for(int i=0;i<graph.V;i++) {
+        for (int i = 0; i < graph.V; i++) {
             parent[i] = -1;
             distance[i] = Double.MAX_VALUE;
         }
@@ -75,13 +77,18 @@ public class GraphQue {
         System.out.println(Arrays.toString(distance));
         System.out.println(Arrays.toString(parent));
     }
-    
-    public int countPaths(int [][]graph, int s, int d, int c) {
-        if(s==d) return c+1;
-        for(int j=0;j<graph.length;j++) {
-            
-            if(graph[s][j] == 1) c +=  countPaths(graph,j,d,c);
+
+    public int countPaths(int[][] graph, int s, int d, boolean[] visited) {
+        visited[s] = true;
+        if (s == d)
+            c++;
+        else {
+            for (int j = 0; j < graph.length; j++) {
+                if ((graph[s][j] == 1) && !visited[j])
+                    countPaths(graph, j, d, visited);
+            }
         }
+        visited[s] = false;
         return c;
     }
 }
