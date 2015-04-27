@@ -4,9 +4,10 @@ import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Map.Entry;
 import java.util.Queue;
+import java.util.Stack;
 
 public class GraphQue {
-    
+
     public int c = 0;
 
     public void dfs(Graph graph) {
@@ -91,4 +92,30 @@ public class GraphQue {
         visited[s] = false;
         return c;
     }
+
+    public void topologicalSort(DirectedGraph graph) {
+        boolean[] visited = new boolean[graph.V];
+        Stack<Integer> nodes = new Stack<>();
+        for (int i = 0; i < graph.V; i++) {
+            visited[i] = false;
+        }
+        for (int i = 0; i < graph.V; i++) {
+            topSort(graph, i, visited, nodes);
+        }
+        // Printing in reverse order to get
+        while (!nodes.isEmpty())
+            System.out.print(nodes.pop() + " , ");
+    }
+
+    public void topSort(DirectedGraph graph, int v, boolean[] visited, Stack<Integer> nodes) {
+        if (visited[v] == true)
+            return;
+        visited[v] = true;
+        for (Integer adjVertex : graph.adj[v]) {
+            if (!visited[adjVertex])
+                topSort(graph, adjVertex, visited, nodes);
+        }
+        nodes.push(v);
+    }
+
 }

@@ -9,6 +9,8 @@ public class GraphQueTest {
     
     private Graph graph;
     
+    private DirectedGraph directedGraph;
+    
     private WeightedGraph weightedGraph;
     
     @Before
@@ -26,6 +28,18 @@ public class GraphQueTest {
         weightedGraph.addEdge(1, 4, 3);
         weightedGraph.addEdge(2, 1, 2);
         weightedGraph.addEdge(2, 3, 2);
+        
+        directedGraph = new DirectedGraph(9);
+        directedGraph.addEdge(0, 1);
+        directedGraph.addEdge(0, 2);
+        directedGraph.addEdge(2, 3);
+        directedGraph.addEdge(1, 3);
+        directedGraph.addEdge(4, 5);
+        directedGraph.addEdge(5, 1);
+        directedGraph.addEdge(4, 7);
+        directedGraph.addEdge(5, 7);
+        directedGraph.addEdge(6, 7);
+        directedGraph.printGraph();
         
     }
     
@@ -48,6 +62,11 @@ public class GraphQueTest {
     public void countPathsTest() {
         int arr[][] = {{0,1,1,0,0},{0,0,0,0,1},{0,1,0,1,0},{0,0,0,0,0},{0,0,0,0,0}};
         System.out.println(graphQue.countPaths(arr, 0, 0, new boolean[] {false,false,false,false,false}));
+    }
+    
+    @Test
+    public void topologicalSortTest() {
+        graphQue.topologicalSort(directedGraph);
     }
 
 }
