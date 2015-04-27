@@ -118,4 +118,45 @@ public class GraphQue {
         nodes.push(v);
     }
 
+    public int findIslands(int[][] graph) {
+        int count = 0;
+        boolean[][] visited = new boolean[graph.length][graph.length];
+        for (int i = 0; i < graph.length; i++)
+            for (int j = 0; j < graph.length; j++)
+                visited[i][j] = false;
+        for (int i = 0; i < graph.length; i++) {
+            for (int j = 0; j < graph.length; j++)
+                if (!visited[i][j] && graph[i][j] == 1) {
+                    count++;
+                    findIslandUtil(graph, i, j, visited);
+                }
+        }
+        System.out.println("No of islands = " + count);
+        return count;
+    }
+
+    public void findIslandUtil(int[][] graph, int x, int y, boolean[][] visited) {
+        if (visited[x][y])
+            return;
+        visited[x][y] = true;
+        // Finding the adjacents for this prob is different, identify the 8
+        // neighbours
+        if (x + 1 < graph.length && graph[x + 1][y] == 1)
+            findIslandUtil(graph, x + 1, y, visited);
+        if (x - 1 >= 0 && graph[x - 1][y] == 1)
+            findIslandUtil(graph, x - 1, y, visited);
+        if (x + 1 < graph.length && y + 1 < graph.length && graph[x + 1][y + 1] == 1)
+            findIslandUtil(graph, x + 1, y + 1, visited);
+        if (x + 1 < graph.length && y - 1 >= 0 && graph[x + 1][y - 1] == 1)
+            findIslandUtil(graph, x + 1, y - 1, visited);
+        if (x - 1 >= 0 && y - 1 >= 0 && graph[x - 1][y - 1] == 1)
+            findIslandUtil(graph, x - 1, y - 1, visited);
+        if (x - 1 >= 0 && y + 1 < graph.length && graph[x - 1][y + 1] == 1)
+            findIslandUtil(graph, x - 1, y + 1, visited);
+        if (y - 1 >= 0 && graph[x][y - 1] == 1)
+            findIslandUtil(graph, x, y - 1, visited);
+        if (y + 1 < graph.length && graph[x][y + 1] == 1)
+            findIslandUtil(graph, x, y + 1, visited);
+    }
+
 }
