@@ -51,4 +51,11 @@ public class DpQueTest {
         Assert.assertTrue(dpQue.lis(arr) == ans);
     }
 
+    @Test
+    public void findMaxChainTest() {
+        Pair[] arr = new Pair[] { new Pair(5, 24), new Pair(39, 60), new Pair(15, 28), new Pair(27, 40),
+                new Pair(50, 90) };
+        Assert.assertEquals(3, dpQue.findMaxChain(arr));
+    }
+
 }

@@ -64,5 +64,30 @@ public class DpQue {
         }
         return max;
     }
+    
+    public int getLongestBitonicSeq(int [] arr) {
+        int [] lis = new int[arr.length];
+        int [] lds = new int[arr.length];
+        
+        
+        
+    }
+
+    public int findMaxChain(Pair[] arr) {
+        int[] temp = new int[arr.length];
+        for (int i = 0; i < arr.length; i++)
+            temp[i] = 1;
+        for (int i = 1; i < arr.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (arr[j].second < arr[i].first && temp[i] < temp[j] + 1)
+                    temp[i] = temp[j] + 1;
+            }
+        }
+        return getArrayMax(temp);
+    }
+    
+    public void sizeThreeSubSeq(int [] arr) {
+      //Fill here after u forget the solution
+    }
 
 }

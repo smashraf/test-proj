@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import rohan.ds.Pair;
+
 public class LargestZeroSum {
 
     private int max(int a, int b) {
@@ -73,15 +75,6 @@ public class LargestZeroSum {
             cand2 = (e.getValue().getDiff() > cand2) ? e.getValue().getDiff() : cand2;
         }
         return max(cand1, cand2);
-    }
-
-    class Pair {
-        Integer first;
-        Integer second;
-
-        public Integer getDiff() {
-            return second != -1 ? second - first : -1;
-        }
     }
 
     private int getMaxFromArray(int[] arr) {
