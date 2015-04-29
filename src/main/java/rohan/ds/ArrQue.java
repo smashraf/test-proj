@@ -1,5 +1,10 @@
 package rohan.ds;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
+
 public class ArrQue {
 
     public int c = 0;
@@ -73,29 +78,29 @@ public class ArrQue {
     }
 
     public void rotate(Integer[] arr, int s, int e, int d) {
-        if(d>=arr.length) return;
+        if (d >= arr.length)
+            return;
         if (e - s < d) {
-            swap(arr,s,e);
+            swap(arr, s, e);
             return;
         }
-        int a1 = s, a2 = s + d-1, b1 = s + d, b2 = e;
-        int lA = a2 - a1 + 1,lB = b2-b1 + 1;
-        if(lA == lB) {
-            blockSwap(arr,a1,a2,b1,b2);
+        int a1 = s, a2 = s + d - 1, b1 = s + d, b2 = e;
+        int lA = a2 - a1 + 1, lB = b2 - b1 + 1;
+        if (lA == lB) {
+            blockSwap(arr, a1, a2, b1, b2);
             return;
-        }
-        else if(lA<lB) {
-            blockSwap(arr, a1, a2, b2-lA +1, b2);
-            rotate(arr,a1,b2-lA,d);
+        } else if (lA < lB) {
+            blockSwap(arr, a1, a2, b2 - lA + 1, b2);
+            rotate(arr, a1, b2 - lA, d);
         } else {
-            blockSwap(arr,a1,a2-lB,b1,b2);
-            rotate(arr,a2-lB+1,b2,d);
+            blockSwap(arr, a1, a2 - lB, b1, b2);
+            rotate(arr, a2 - lB + 1, b2, d);
         }
     }
 
     private void blockSwap(Integer[] arr, int s1, int e1, int s2, int e2) {
-        for (int i = 0; i <= e1-s1; i++) {
-            swap(arr, s1+i, i + s2);
+        for (int i = 0; i <= e1 - s1; i++) {
+            swap(arr, s1 + i, i + s2);
         }
     }
 
@@ -105,4 +110,62 @@ public class ArrQue {
         arr[j] = temp;
     }
 
+    public boolean hasTriplet(int[] arr, int n) {
+        if (arr.length < 3)
+            return false;
+        mergeSort(arr, 0, arr.length - 1);
+        for (int i = 0; i < arr.length - 2; i++) {
+            int j = i + 1, k = arr.length - 1;
+            int sum = n - arr[i];
+            while (j < k) {
+                if (arr[j] + arr[k] == sum)
+                    return true;
+                else if (arr[j] + arr[k] > sum)
+                    k--;
+                else
+                    j++;
+            }
+        }
+        return false;
+    }
+
+    public Set<Integer> getQuadruple(int[] arr, int n) {
+        if (arr.length < 4)
+            return null;
+        Set<Integer> quadSet = new HashSet<>();
+        PairSum[] aux = new PairSum[arr.length * (arr.length - 1) / 2];
+        // Generating all possible pairs
+        int k = 0;
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                aux[k] = new PairSum();
+                aux[k].sum = arr[i] + arr[j];
+                aux[k].firstIndex = i;
+                aux[k].secondIndex = j;
+                k++;
+            }
+        }
+        Arrays.sort(aux, new Comparator<PairSum>() {
+            @Override
+            public int compare(PairSum o1, PairSum o2) {
+                return Integer.compare(o1.sum, o2.sum);
+            }
+        });
+        int left = 0, right = aux.length - 1;
+        while (left < right) {
+            if (aux[left].sum + aux[right].sum == n && aux[left].firstIndex != aux[right].firstIndex
+                    && aux[left].firstIndex != aux[right].secondIndex && aux[left].secondIndex != aux[right].firstIndex
+                    && aux[left].secondIndex != aux[right].secondIndex) {
+                quadSet.add(arr[aux[left].firstIndex]);
+                quadSet.add(arr[aux[left].secondIndex]);
+                quadSet.add(arr[aux[right].firstIndex]);
+                quadSet.add(arr[aux[right].secondIndex]);
+                return quadSet;
+            } else if (aux[left].sum + aux[right].sum < n)
+                left++;
+            else
+                right--;
+        }
+        return quadSet;
+    }
 }

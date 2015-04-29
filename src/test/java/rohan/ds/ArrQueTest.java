@@ -1,7 +1,6 @@
 package rohan.ds;
 
 import junitparams.JUnitParamsRunner;
-import static junitparams.JUnitParamsRunner.$;
 import junitparams.Parameters;
 
 import org.junit.Assert;
@@ -47,8 +46,8 @@ public class ArrQueTest {
         return new Object[] {
                 new Object[] { new Integer[] { 1, 2, 3, 4, 5 }, 0, 4, 2, new Integer[] { 3, 4, 5, 1, 2 } },
                 new Object[] { new Integer[] { 1, 2, 3, 4, 5, 6 }, 0, 5, 2, new Integer[] { 3, 4, 5, 6, 1, 2 } },
-                new Object[] { new Integer[] { 1, 2, 3 }, 0, 2, 2, new Integer[] { 3,1,2 } },
-                new Object[] { new Integer[] { 1, 2, 3 }, 0, 2, 3, new Integer[] { 1,2,3 } }};
+                new Object[] { new Integer[] { 1, 2, 3 }, 0, 2, 2, new Integer[] { 3, 1, 2 } },
+                new Object[] { new Integer[] { 1, 2, 3 }, 0, 2, 3, new Integer[] { 1, 2, 3 } } };
     }
 
     @Test
@@ -56,6 +55,23 @@ public class ArrQueTest {
     public void rotateTest(Integer[] arr, int s, int e, int d, Integer[] ans) {
         arrQue.rotate(arr, s, e, d);
         Assert.assertArrayEquals(ans, arr);
+    }
+
+    public Object[] getTripletArray() {
+        return new Object[] { new Object[] { new int[] { 1, 4, 45, 6, 10, 8 }, 22 },
+                new Object[] { new int[] { 12, 3, 4, 1, 6, 9 }, 24 } };
+    }
+
+    @Test
+    @Parameters(method = "getTripletArray")
+    public void hasTripletTest(int[] arr, int n) {
+        Assert.assertTrue(arrQue.hasTriplet(arr, n));
+    }
+
+    @Test
+    public void getQuadrupleTest() {
+        int[] arr = { 10, 2, 3, 4, 5, 9, 7, 8 };
+        System.out.println(arrQue.getQuadruple(arr, 23).toString());
     }
 
 }
