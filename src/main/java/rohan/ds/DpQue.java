@@ -42,4 +42,27 @@ public class DpQue {
         return a > b ? a : b;
     }
 
+    public int lis(int arr[]) {
+        int[] temp = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            temp[i] = 1;
+        }
+        for (int i = 1; i < arr.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (arr[j] < arr[i] && temp[i] < temp[j] + 1)
+                    temp[i] = temp[j] + 1;
+            }
+        }
+        return getArrayMax(temp);
+    }
+
+    private int getArrayMax(int[] arr) {
+        int max = arr[0];
+        for (int i : arr) {
+            if (max < i)
+                max = i;
+        }
+        return max;
+    }
+
 }

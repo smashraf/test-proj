@@ -15,7 +15,7 @@ public class DpQueTest {
 
     public Object[] getIntegerArray() {
         return $($(new Integer[] { 1, 2, -4, 3, -5 }, 3), $(new Integer[] { 1, 2, 3 }, 6),
-                $(new Integer[] { -2, -3, 4, -1, -2, 1, 5, -3 }, 7),$(new Integer[]{-1},-1));
+                $(new Integer[] { -2, -3, 4, -1, -2, 1, 5, -3 }, 7), $(new Integer[] { -1 }, -1));
     }
 
     @Test
@@ -29,16 +29,26 @@ public class DpQueTest {
     public void kadaneTest(Integer[] arr, int ans) {
         Assert.assertEquals(ans, dpQue.kadane(arr));
     }
-    
+
     public Object[] getIntegerArrayForProduct() {
         return $($(new Integer[] { -2, -3, 4, -1, -2, 1, 5, -3 }, 360), $(new Integer[] { 1, 2, 3 }, 6),
-                $(new Integer[] { -2, -3, 4, -1, -2, 1, 5, -3 }, 360),$(new Integer[]{-1},1));
+                $(new Integer[] { -2, -3, 4, -1, -2, 1, 5, -3 }, 360), $(new Integer[] { -1 }, 1));
     }
-    
+
     @Test
     @Parameters(method = "getIntegerArrayForProduct")
     public void getMaxProductSubArrayTest(Integer[] arr, int ans) {
-        Assert.assertEquals(ans,dpQue.getMaxProductSubArray(arr, 1, 1));
+        Assert.assertEquals(ans, dpQue.getMaxProductSubArray(arr, 1, 1));
+    }
+
+    public Object[] getArrayLis() {
+        return new Object[] { new Object[] { new int[] { 10, 22, 9, 33, 21, 50, 41, 60, 80 }, 6 } };
+    }
+
+    @Test
+    @Parameters(method = "getArrayLis")
+    public void lisTest(int[] arr, int ans) {
+        Assert.assertTrue(dpQue.lis(arr) == ans);
     }
 
 }
