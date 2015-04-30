@@ -168,4 +168,34 @@ public class ArrQue {
         }
         return quadSet;
     }
+
+    public boolean hasPartition(int[] arr) {
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++)
+            sum += arr[i];
+        return sum % 2 == 0 ? subSetSum(arr, 0, sum / 2) : false;
+    }
+
+    public boolean subSetSum(int[] arr, int i, int n) {
+        if (n == 0)
+            return true;
+        else if (i >= n)
+            return false;
+        else
+            return subSetSum(arr, i + 1, n - arr[i]) || subSetSum(arr, i + 1, n);
+    }
+
+    public boolean subSetSumDp(int[] arr, int dummy1, int n) {
+        boolean[][] mat = new boolean[arr.length + 1][n + 1];
+        for (int j = 0; j <= n; j++)
+            mat[0][j] = false;
+        for (int i = 0; i <= arr.length; i++)
+            mat[i][0] = true;
+        for (int i = 1; i <= arr.length; i++) {
+            for (int j = 1; j <= n; j++) {
+                mat[i][j] = mat[i - 1][j] || (j - arr[i-1] >= 0 ? mat[j - arr[i-1]][j - 1] : false);
+            }
+        }
+        return mat[arr.length - 1][n];
+    }
 }

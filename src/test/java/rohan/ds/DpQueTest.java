@@ -58,4 +58,23 @@ public class DpQueTest {
         Assert.assertEquals(3, dpQue.findMaxChain(arr));
     }
 
+    @Test
+    public void getLongestBitonicSeqTest() {
+        int[] arr = { 1, 11, 2, 10, 4, 5, 2, 1 };
+        Assert.assertEquals(6, dpQue.getLongestBitonicSeq(arr));
+    }
+
+    @Test
+    public void getMaxSubArrayForSumTest() {
+        int[] arr = { 1, 4, 20, 3, 10, 5 };
+        System.out.println(dpQue.getMaxSubArrayForSum(arr, 33).toString());
+    }
+
+    @Test
+    public void getLargestZeroOneSubArrayTest() {
+        // Integer [] arr = {1, 0, 1, 1, 1, 0, 0};
+        Integer[] arr = { 1, 1, 1, 1 };
+        System.out.println(dpQue.getLargestZeroOneSubArray(arr));
+    }
+
 }

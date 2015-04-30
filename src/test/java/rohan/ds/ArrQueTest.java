@@ -74,4 +74,21 @@ public class ArrQueTest {
         System.out.println(arrQue.getQuadruple(arr, 23).toString());
     }
 
+    public Object[] getPartitionArray() {
+        return new Object[] { new Object[] { new int[] { 1, 5, 11, 5 }, true },
+                new Object[] { new int[] { 1, 5, 11}, false } };
+    }
+
+    @Test
+    @Parameters(method = "getPartitionArray")
+    public void hasPartitionTest(int[] arr, boolean ans) {
+        Assert.assertEquals(ans, arrQue.hasPartition(arr));
+    }
+    
+    @Test
+    public void subSetSumDpTest() {
+        int [] arr = new int[] { 1, 5, 11, 5 };
+        System.out.println(arrQue.subSetSumDp(arr,-10000,11));
+    }
+
 }

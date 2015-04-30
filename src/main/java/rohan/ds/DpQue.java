@@ -1,5 +1,7 @@
 package rohan.ds;
 
+import rohan.junit.LargestZeroSum;
+
 public class DpQue {
 
     public int getMaxSubArray(Integer[] arr) {
@@ -64,13 +66,29 @@ public class DpQue {
         }
         return max;
     }
-    
-    public int getLongestBitonicSeq(int [] arr) {
-        int [] lis = new int[arr.length];
-        int [] lds = new int[arr.length];
-        
-        
-        
+
+    public int getLongestBitonicSeq(int[] arr) {
+        int[] lis = new int[arr.length];
+        int[] lds = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            lis[i] = 1;
+            lds[i] = 1;
+        }
+        for (int i = 1; i < arr.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (lis[i] < lis[j] + 1 && arr[i] > arr[j])
+                    lis[i] = lis[j] + 1;
+                if (lds[i] < lds[j] + 1 && arr[i] < arr[j])
+                    lds[i] = lds[j] + 1;
+            }
+        }
+
+        int max = lis[0] + lds[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (lis[i] + lds[i] > max)
+                max = lis[i] + lds[i];
+        }
+        return max - 1;
     }
 
     public int findMaxChain(Pair[] arr) {
@@ -85,9 +103,41 @@ public class DpQue {
         }
         return getArrayMax(temp);
     }
-    
-    public void sizeThreeSubSeq(int [] arr) {
-      //Fill here after u forget the solution
+
+    public void sizeThreeSubSeq(int[] arr) {
+        // Fill here after u forget the solution
+    }
+
+    public Pair getMaxSubArrayForSum(int[] arr, int n) {
+        Pair pair = new Pair();
+        pair.first = 0;
+        pair.second = 0;
+        int sum = arr[0], start = 0, maxDiff = 0;
+        for (int i = 1; i < arr.length; i++) {
+            if (sum > n) {
+                while (sum > n && start < i - 1) {
+                    sum -= arr[start];
+                    start++;
+                }
+            } else if (sum == n && maxDiff < i - start) {
+                pair.first = start;
+                pair.second = i - 1;
+                maxDiff = i - start;
+            } else {
+                sum += arr[i];
+            }
+
+        }
+        return pair;
+    }
+
+    public int getLargestZeroOneSubArray(Integer[] arr) {
+        LargestZeroSum largestZeroSum = new LargestZeroSum();
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == 0)
+                arr[i] = -1;
+        }
+        return largestZeroSum.getLargestSumSetSmart(arr, 1, 2, 3);
     }
 
 }

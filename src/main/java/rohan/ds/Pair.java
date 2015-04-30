@@ -18,4 +18,9 @@ public class Pair {
         return second != -1 ? second - first : -1;
     }
 
+    @Override
+    public String toString() {
+        return "Pair [first=" + first + ", second=" + second + "]";
+    }
+
 }
