@@ -113,13 +113,14 @@ public class DpQue {
         pair.first = 0;
         pair.second = 0;
         int sum = arr[0], start = 0, maxDiff = 0;
-        for (int i = 1; i < arr.length; i++) {
+        for (int i = 1; i <= arr.length; i++) {
             if (sum > n) {
                 while (sum > n && start < i - 1) {
                     sum -= arr[start];
                     start++;
                 }
-            } else if (sum == n && maxDiff < i - start) {
+            }
+            if (sum == n && maxDiff < i - start) {
                 pair.first = start;
                 pair.second = i - 1;
                 maxDiff = i - start;

@@ -66,8 +66,8 @@ public class DpQueTest {
 
     @Test
     public void getMaxSubArrayForSumTest() {
-        int[] arr = { 1, 4, 20, 3, 10, 5 };
-        System.out.println(dpQue.getMaxSubArrayForSum(arr, 33).toString());
+        int[] arr = { 14, 20, 3, 10, 5 };
+        System.out.println(dpQue.getMaxSubArrayForSum(arr, 15).toString());
     }
 
     @Test
