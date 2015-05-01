@@ -124,10 +124,10 @@ public class DpQue {
                 pair.first = start;
                 pair.second = i - 1;
                 maxDiff = i - start;
-            } else {
+            }
+            if (i < arr.length) {
                 sum += arr[i];
             }
-
         }
         return pair;
     }

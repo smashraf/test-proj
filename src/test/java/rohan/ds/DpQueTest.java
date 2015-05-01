@@ -64,10 +64,15 @@ public class DpQueTest {
         Assert.assertEquals(6, dpQue.getLongestBitonicSeq(arr));
     }
 
+    public Object[] getMaxSubArrayForSumArray() {
+        return new Object[] { new Object[] { new int[] { 14, 20, 3, 10, 5, 111, 5 }, 15 },
+                new Object[] { new int[] { 14, 20, 3, 10, 5, 111, 5, 5, 5 }, 15 } };
+    }
+
     @Test
-    public void getMaxSubArrayForSumTest() {
-        int[] arr = { 14, 20, 3, 10, 5 };
-        System.out.println(dpQue.getMaxSubArrayForSum(arr, 15).toString());
+    @Parameters(method = "getMaxSubArrayForSumArray")
+    public void getMaxSubArrayForSumTest(int[] arr, int n) {
+        System.out.println(dpQue.getMaxSubArrayForSum(arr, n).toString());
     }
 
     @Test
