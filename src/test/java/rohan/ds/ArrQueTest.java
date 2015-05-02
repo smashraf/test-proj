@@ -76,7 +76,7 @@ public class ArrQueTest {
 
     public Object[] getPartitionArray() {
         return new Object[] { new Object[] { new int[] { 1, 5, 11, 5 }, true },
-                new Object[] { new int[] { 1, 5, 11}, false } };
+                new Object[] { new int[] { 1, 5, 11 }, false } };
     }
 
     @Test
@@ -84,11 +84,23 @@ public class ArrQueTest {
     public void hasPartitionTest(int[] arr, boolean ans) {
         Assert.assertEquals(ans, arrQue.hasPartition(arr));
     }
-    
+
     @Test
     public void subSetSumDpTest() {
-        int [] arr = new int[] { 1, 5, 11, 5 };
-        System.out.println(arrQue.subSetSumDp(arr,-10000,11));
+        int[] arr = new int[] { 1, 5, 11, 5 };
+        System.out.println(arrQue.subSetSumDp(arr, -10000, 11));
+    }
+
+    @Test
+    public void minJumpsTest() {
+        int[] arr = { 1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9 };
+        System.out.println(arrQue.minJumps(arr, 1, 0));
+    }
+
+    @Test
+    public void getMaxOneRowTest() {
+        int[][] arr = { { 0, 0, 0, 0 }, { 0, 0, 1, 1 }, { 0, 1, 1, 1 }, { 0, 0, 0, 0 } };
+        System.out.println(arrQue.getMaxOneRow(arr));
     }
 
 }

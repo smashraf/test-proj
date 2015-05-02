@@ -81,5 +81,12 @@ public class DpQueTest {
         Integer[] arr = { 1, 1, 1, 1 };
         System.out.println(dpQue.getLargestZeroOneSubArray(arr));
     }
+    
+    @Test
+    public void maxCircularSubArrayTest() {
+        //Integer a[] = {8, -8, 9, -9, 10, -11, 12};
+        Integer a[] = {10, -3, -4, 7, 6, 5, -4, -1};
+        System.out.println(dpQue.maxCircularSubArray(a));
+    }
 
 }

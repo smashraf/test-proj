@@ -193,9 +193,61 @@ public class ArrQue {
             mat[i][0] = true;
         for (int i = 1; i <= arr.length; i++) {
             for (int j = 1; j <= n; j++) {
-                mat[i][j] = mat[i - 1][j] || (j - arr[i-1] >= 0 ? mat[j - arr[i-1]][j - 1] : false);
+                mat[i][j] = mat[i - 1][j] || (j - arr[i - 1] >= 0 ? mat[j - arr[i - 1]][j - 1] : false);
             }
         }
         return mat[arr.length - 1][n];
     }
+
+    public int minJumps(int[] arr, int index, int c) {
+        if (index >= arr.length - 1)
+            return c;
+        if (index == 0)
+            return c + 1;
+        else {
+            int min = Integer.MAX_VALUE;
+            for (int k = 0; k < index; k++) {
+                if (index - k <= arr[k] && min > index - k) {
+                    min = index - k;
+                }
+            }
+            return c + min;
+        }
+
+    }
+
+    public void getLISSmart(int[] arr) {
+        int[] temp = new int[arr.length];
+        temp[0] = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+
+        }
+    }
+
+    public int getMaxOneRow(int[][] arr) {
+        // find first 1 in first row
+        int indexLeftMostOne = arr.length-1;
+        int row = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[0][i] == 1) {
+                indexLeftMostOne = i;
+                break;
+            }
+            
+        }
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i][indexLeftMostOne] == 0)
+                continue;
+            else {
+                int j = indexLeftMostOne;
+                while (j>= 0 && arr[i][j] == 1) {
+                    indexLeftMostOne = j;
+                    j--;
+                }
+                row = i;
+            }
+        }
+        return row;
+    }
+
 }

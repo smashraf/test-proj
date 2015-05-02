@@ -141,4 +141,15 @@ public class DpQue {
         return largestZeroSum.getLargestSumSetSmart(arr, 1, 2, 3);
     }
 
+    public int maxCircularSubArray(Integer arr[]) {
+        int cand1 = kadane(arr);
+        int totalSum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            totalSum += arr[i];
+            arr[i] = -arr[i];
+        }
+        int cand2 = totalSum + kadane(arr);
+        return max(cand1,cand2);
+    }
+
 }
