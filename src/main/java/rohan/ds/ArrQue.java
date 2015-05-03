@@ -399,4 +399,34 @@ public class ArrQue {
         }
     }
 
+    private void swap(int arr[], int index1, int index2) {
+        int temp = arr[index1];
+        arr[index1] = arr[index2];
+        arr[index2] = temp;
+    }
+
+    public int qPartition(int arr[], int start, int end) {
+        int i = start, j = end - 1;
+        while (i <= j) {
+            while (j >= i && arr[j] > arr[end])
+                j--;
+            if (j < i)
+                break;
+            if (arr[i] > arr[end]) {
+                swap(arr, i, j);
+            }
+            i++;
+        }
+        swap(arr, i, end);
+        return i;
+    }
+
+    public void qSort(int[] arr, int start, int end) {
+        if (start < end) {
+            int p = qPartition(arr, start, end);
+            qSort(arr, start, p - 1);
+            qSort(arr, p + 1, end);
+        }
+    }
+
 }

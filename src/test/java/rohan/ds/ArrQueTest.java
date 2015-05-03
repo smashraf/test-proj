@@ -168,4 +168,24 @@ public class ArrQueTest {
         System.out.println(Arrays.toString(arr));
     }
 
+    public Object[] getArrayForSorting() {
+        return new Object[] { new Object[] { new int[] { 11, 10, 23, 20 }, 2 },
+                new Object[] { new int[] { 23, 10, 20, 11, 12, 6, 7 }, 1 } };
+    }
+
+    @Test
+    @Parameters(method = "getArrayForSorting")
+    public void qPartitionTest(int[] arr, int ans) {
+
+        Assert.assertEquals(ans, arrQue.qPartition(arr, 0, arr.length - 1));
+    }
+
+    @Test
+    public void qSortTest() {
+        //int arr[] = { 23, 10, 20, 11, 12, 6, 7 };
+        int [] arr = {};
+        arrQue.qSort(arr, 0, arr.length - 1);
+        System.out.println(Arrays.toString(arr));
+    }
+
 }
