@@ -371,4 +371,32 @@ public class ArrQue {
         return globalSum;
     }
 
+    public void pancakeSort(int[] arr, int end) {
+        if (end <= 0)
+            return;
+        int max = arr[0], maxIndex = 0;
+        for (int i = 0; i <= end; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+                maxIndex = i;
+            }
+        }
+        if (maxIndex != end) {
+            flip(arr, maxIndex);
+            flip(arr, end);
+        }
+        pancakeSort(arr, end - 1);
+    }
+
+    private void flip(int[] arr, int end) {
+        int i = 0, j = end;
+        while (i < j) {
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+            i++;
+            j--;
+        }
+    }
+
 }

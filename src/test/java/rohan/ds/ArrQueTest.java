@@ -1,5 +1,7 @@
 package rohan.ds;
 
+import java.util.Arrays;
+
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 
@@ -137,7 +139,8 @@ public class ArrQueTest {
                         new Pair[] { new Pair(4, 6), new Pair(6, 5), new Pair(7, 3), new Pair(5, 11), new Pair(4, 1) },
                         4 },
                 new Object[] { new Pair[] { new Pair(4, 6), new Pair(6, 5), new Pair(7, 3), new Pair(4, 5) }, 1 },
-                new Object[] { new Pair[] { new Pair(6, 4), new Pair(3, 6), new Pair(7, 3) }, 2 },new Object[] { new Pair[] {new Pair(3, 6), new Pair(1, 1113) }, -1 } };
+                new Object[] { new Pair[] { new Pair(6, 4), new Pair(3, 6), new Pair(7, 3) }, 2 },
+                new Object[] { new Pair[] { new Pair(3, 6), new Pair(1, 1113) }, -1 } };
     }
 
     @Test
@@ -148,17 +151,21 @@ public class ArrQueTest {
 
     @Test
     public void printLargestTest() {
-        Integer [] arr = {54, 546, 548, 60};
+        Integer[] arr = { 54, 546, 548, 60 };
         System.out.println(arrQue.printLargest(arr));
     }
-    
+
     @Test
     public void maxSubMatrixTest() {
-        int[][] arr = {{1, 2, -1, -4, -20},
-                {-8, -3, 4, 2, 1},
-                {3, 8, 10, 1, 3},
-                {-4, -1, 1, 7, -6}};
+        int[][] arr = { { 1, 2, -1, -4, -20 }, { -8, -3, 4, 2, 1 }, { 3, 8, 10, 1, 3 }, { -4, -1, 1, 7, -6 } };
         System.out.println(arrQue.maxSubMatrix(arr));
     }
-    
+
+    @Test
+    public void pancakeSortTest() {
+        int arr[] = { 23, 10, 20, 11, 12, 6, 7 };
+        arrQue.pancakeSort(arr, arr.length - 1);
+        System.out.println(Arrays.toString(arr));
+    }
+
 }
