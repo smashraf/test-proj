@@ -2,12 +2,17 @@ package rohan.ds;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 public class ArrQue {
 
     public int c = 0;
+
+    public DpQue dpQue = new DpQue();
 
     public void mergeSort(int[] arr, int p, int q) {
         if (p < q) {
@@ -226,21 +231,21 @@ public class ArrQue {
 
     public int getMaxOneRow(int[][] arr) {
         // find first 1 in first row
-        int indexLeftMostOne = arr.length-1;
+        int indexLeftMostOne = arr.length - 1;
         int row = 0;
         for (int i = 0; i < arr.length; i++) {
             if (arr[0][i] == 1) {
                 indexLeftMostOne = i;
                 break;
             }
-            
+
         }
         for (int i = 1; i < arr.length; i++) {
             if (arr[i][indexLeftMostOne] == 0)
                 continue;
             else {
                 int j = indexLeftMostOne;
-                while (j>= 0 && arr[i][j] == 1) {
+                while (j >= 0 && arr[i][j] == 1) {
                     indexLeftMostOne = j;
                     j--;
                 }
@@ -248,6 +253,122 @@ public class ArrQue {
             }
         }
         return row;
+    }
+
+    public void printUniqueRows(int[][] arr) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            int num = 0;
+            for (int j = 0; j < arr.length; j++) {
+                num += arr[i][j] == 1 ? Math.pow(2, j) : 0;
+            }
+            map.put(num, i);
+        }
+        for (Entry<Integer, Integer> entry : map.entrySet()) {
+            System.out.println(entry.getValue());
+        }
+    }
+
+    public int maxDiff(int[] arr) {
+        int i, j;
+        i = 0;
+        j = 1;
+        int globalDiff = 0;
+        int localDiff;
+        while (j < arr.length) {
+            if (arr[j] > arr[i]) {
+                localDiff = arr[j] - arr[i];
+                if (localDiff > globalDiff)
+                    globalDiff = localDiff;
+                j++;
+            } else {
+                while (i < j) {
+                    if (arr[i] < arr[j]) {
+                        localDiff = arr[j] - arr[i];
+                        if (localDiff > globalDiff)
+                            globalDiff = localDiff;
+                    }
+                    i++;
+                }
+                j++;
+            }
+        }
+        return globalDiff;
+    }
+
+    public int countTriangle(int[] arr) {
+        mergeSort(arr, 0, arr.length - 1);
+        int i = 0, j = 1, k, count = 0;
+        for (i = 0; i < arr.length - 2; i++) {
+            k = i + 2;
+            for (j = i + 1; j < arr.length - 1; j++) {
+                while (k < arr.length && arr[i] + arr[j] > arr[k])
+                    k++;
+                count += k - j - 1;
+            }
+        }
+        return count;
+    }
+
+    public int getFirstPump(Pair[] pumps) {
+        int i = 0, j = 0;
+        int sum = 0;
+        while (j + 1 != (i % pumps.length)) {
+            sum += (pumps[j].first - pumps[j].second);
+            while (sum < 0 && i <= j) {
+                if (i == pumps.length - 1)
+                    i = 0;
+                sum += (pumps[i].second - pumps[i].first);
+                i++;
+            }
+            j++;
+            if (j == pumps.length - 1)
+                j = 0;
+        }
+        if (sum <= 0)
+            return -1;
+        return i;
+    }
+
+    public String printLargest(Integer[] arr) {
+        Arrays.sort(arr, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                int diff = o1.toString().length() - o2.toString().length();
+                if (diff > 0)
+                    o2 *= (int) Math.pow(10, diff);
+                else if (diff < 0)
+                    o1 *= (int) Math.pow(10, (-1) * diff);
+                return Integer.compare(o2, o1);
+            }
+        });
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < arr.length; i++) {
+            str.append(arr[i]);
+        }
+        return str.toString();
+    }
+
+    /*
+     * Read from this link when in doubt
+     * http://prismoskills.appspot.com/lessons/
+     * Dynamic_Programming/Chapter_07_-_Submatrix_with_largest_sum.jsp
+     */
+    public int maxSubMatrix(int matrix[][]) {
+        int globalSum = 0;
+        for (int i = 0; i < matrix.length; i++) {
+            Integer temp[] = new Integer[matrix.length];
+            for (int k = 0; k < temp.length; k++)
+                temp[k] = 0;
+            for (int j = i; j < matrix.length; j++) {
+                for (int k = 0; k < matrix.length; k++)
+                    temp[k] += matrix[k][j];
+                int sum = dpQue.kadane(temp);
+                if (sum > globalSum)
+                    globalSum = sum;
+            }
+        }
+        return globalSum;
     }
 
 }

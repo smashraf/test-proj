@@ -103,4 +103,62 @@ public class ArrQueTest {
         System.out.println(arrQue.getMaxOneRow(arr));
     }
 
+    @Test
+    public void printUniqueRowsTest() {
+        int[][] arr = { { 0, 0, 0, 0 }, { 1, 0, 1, 1 }, { 0, 1, 1, 1 }, { 0, 0, 0, 0 } };
+        arrQue.printUniqueRows(arr);
+    }
+
+    public Object[] getMaxDiffArray() {
+        return new Object[] { new Object[] { new int[] { 2, 3, 10, 6, 4, 8, 1 }, 8 },
+                new Object[] { new int[] { 7, 9, 5, 6, 3, 2 }, 2 } };
+    }
+
+    @Test
+    @Parameters(method = "getMaxDiffArray")
+    public void maxDiffTest(int arr[], int ans) {
+        Assert.assertEquals(ans, arrQue.maxDiff(arr));
+    }
+
+    public Object[] getTriangleCountArray() {
+        return new Object[] { new Object[] { new int[] { 4, 6, 3, 7 }, 3 },
+                new Object[] { new int[] { 10, 21, 22, 100, 101, 200, 300 }, 6 } };
+    }
+
+    @Test
+    @Parameters(method = "getTriangleCountArray")
+    public void countTriangleTest(int[] arr, int ans) {
+        Assert.assertEquals(ans, arrQue.countTriangle(arr));
+    }
+
+    public Object[] getPumps() {
+        return new Object[] {
+                new Object[] {
+                        new Pair[] { new Pair(4, 6), new Pair(6, 5), new Pair(7, 3), new Pair(5, 11), new Pair(4, 1) },
+                        4 },
+                new Object[] { new Pair[] { new Pair(4, 6), new Pair(6, 5), new Pair(7, 3), new Pair(4, 5) }, 1 },
+                new Object[] { new Pair[] { new Pair(6, 4), new Pair(3, 6), new Pair(7, 3) }, 2 },new Object[] { new Pair[] {new Pair(3, 6), new Pair(1, 1113) }, -1 } };
+    }
+
+    @Test
+    @Parameters(method = "getPumps")
+    public void getFirstPumpTest(Pair[] pumps, int ans) {
+        Assert.assertEquals(ans, arrQue.getFirstPump(pumps));
+    }
+
+    @Test
+    public void printLargestTest() {
+        Integer [] arr = {54, 546, 548, 60};
+        System.out.println(arrQue.printLargest(arr));
+    }
+    
+    @Test
+    public void maxSubMatrixTest() {
+        int[][] arr = {{1, 2, -1, -4, -20},
+                {-8, -3, 4, 2, 1},
+                {3, 8, 10, 1, 3},
+                {-4, -1, 1, 7, -6}};
+        System.out.println(arrQue.maxSubMatrix(arr));
+    }
+    
 }
