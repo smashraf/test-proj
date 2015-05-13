@@ -47,8 +47,7 @@ public class MyStringUtilsTest {
 
     public Object[] getStrings() {
         return $(new Object[] { "INTENTION", "EXECUTION", 5 }, new Object[] { "car", "abc", 3 }, new Object[] { "",
-                "EXECUTION", 9 },new Object[] { "appropriate meaning", "approximate matching", 7 }
-                );
+                "EXECUTION", 9 }, new Object[] { "appropriate meaning", "approximate matching", 7 });
     }
 
     public Object[] getStringsDp() {
@@ -67,6 +66,34 @@ public class MyStringUtilsTest {
     public void editDistDpTest(String str1, String str2, int ans) {
         char[] x = str1.toCharArray(), y = str2.toCharArray(), z = {};
         Assert.assertEquals(ans, myStringUtils.editDistDp(x, y, z, 0, 0, 0, x.length, y.length, 0));
+    }
+
+    @Test
+    public void findSmallestWindowTest() {
+        System.out.println(myStringUtils.findSmallestWindow("this is a test string", "tist"));
+    }
+
+    @Test
+    public void printAllPermsTest() {
+        myStringUtils.printAllPerms("ABC".toCharArray());
+    }
+
+    @Test
+    public void printInterleavingsTest() {
+        String str1 = "AB";
+        String str2 = "CDE";
+        myStringUtils.printInterleavings(str1, str2, 0, 0, new char[str1.length() + str2.length()], 0);
+    }
+
+    @Test
+    public void checkInterleavingTest() {
+        System.out.println(myStringUtils.checkInterleaving("AB", "CD", "ACBD"));
+        System.out.println(myStringUtils.checkInterleaving("AB", "CD", "ADBC"));
+    }
+    
+    @Test
+    public void printAllPermsLexigoraphicallyTest() {
+        myStringUtils.printAllPermsLexigoraphically("ABC".toCharArray());
     }
 
 }
