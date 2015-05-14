@@ -95,5 +95,17 @@ public class MyStringUtilsTest {
     public void printAllPermsLexigoraphicallyTest() {
         myStringUtils.printAllPermsLexigoraphically("ABC".toCharArray());
     }
+    
+    @Test
+    public void longestCommonSubstringTest() {
+        System.out.println(myStringUtils.longestCommonSubstring("GEEKSFORGEEKS", "FEWGEEKS"));
+    }
+    
+    @Test
+    public void longestCommonSubseqTest() {
+        System.out.println(myStringUtils.longestCommonSubseq("ABCA", "BDCA"));
+        System.out.println(myStringUtils.longestPalindronicSubseq("ABBAC", 0, 0));
+        System.out.println(myStringUtils.longestPalindronicSubseqRec("ABBAC", 0, 4));
+    }
 
 }

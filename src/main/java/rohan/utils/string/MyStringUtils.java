@@ -176,24 +176,87 @@ public class MyStringUtils {
     public void printAllPermsLexigoraphically(char[] str) {
         Arrays.sort(str);
         System.out.println(str);
-        int c,min;
-        while ((c=getCand(str)) != -1) {
-            min = c+1;
-            for(int i=c+1;i<str.length;i++) {
-                if(str[i]>str[c] && str[i]<str[min]) min = i;
+        int c, min;
+        while ((c = getCand(str)) != -1) {
+            min = c + 1;
+            for (int i = c + 1; i < str.length; i++) {
+                if (str[i] > str[c] && str[i] < str[min])
+                    min = i;
             }
-            swap(str,c,min);
-            Arrays.sort(str,c+1,str.length);
+            swap(str, c, min);
+            Arrays.sort(str, c + 1, str.length);
             System.out.println(str);
         }
     }
 
     private int getCand(char[] str) {
-        if(str.length<2) return -1;
+        if (str.length < 2)
+            return -1;
         for (int i = str.length - 2; i >= 0; i--) {
-            if(str[i]<str[i+1]) return i;
+            if (str[i] < str[i + 1])
+                return i;
         }
         return -1;
+    }
+
+    public int longestCommonSubstring(String str1, String str2) {
+        int[][] arr = new int[str1.length()][str2.length()];
+        int max = 0;
+        for (int i = 0; i < str1.length(); i++)
+            for (int j = 0; j < str2.length(); j++) {
+                if (str2.charAt(j) == str1.charAt(i) && i - 1 > 0 && j - 1 > 0)
+                    arr[i][j] = arr[i - 1][j - 1] + 1;
+                else if (str2.charAt(j) == str1.charAt(i))
+                    arr[i][j] = 1;
+                else
+                    arr[i][j] = 0;
+                if (arr[i][j] > max)
+                    max = arr[i][j];
+            }
+        return max;
+    }
+
+    public int longestPalindronicSubstr(String str) {
+        return longestCommonSubstring(str, reverseString(str));
+    }
+
+    public int longestPalindronicSubseqRec(String str, int begin, int end) {
+        if (begin > end)
+            return 0;
+        else if (str.charAt(begin) == str.charAt(end))
+            return longestPalindronicSubseqRec(str, begin + 1, end - 1) + 2;
+        else
+            return max(longestPalindronicSubseqRec(str, begin + 1, end),
+                    longestPalindronicSubseqRec(str, begin, end - 1));
+    }
+
+    public int longestPalindronicSubseq(String str, int begin, int end) {
+
+        // Same as longest common substring od str and rev of str
+        return longestCommonSubseq(str, reverseString(str));
+    }
+
+    public int longestCommonSubseq(String str1, String str2) {
+        int[][] arr = new int[str1.length()][str2.length()];
+        for (int i = 0; i < str1.length(); i++) {
+            for (int j = 0; j < str2.length(); j++) {
+                if (str1.charAt(i) == str2.charAt(j))
+                    arr[i][j] = i - 1 >= 0 && j - 1 >= 0 ? arr[i - 1][j - 1] + 1 : 1;
+                else {
+                    if (i - 1 >= 0 && j - 1 >= 0)
+                        arr[i][j] = max(arr[i - 1][j], arr[i][j - 1]);
+                    else if (i - 1 >= 0 && j - 1 < 0)
+                        arr[i][j] = arr[i - 1][j];
+                    else if (i - 1 < 0 && j - 1 >= 0)
+                        arr[i][j] = arr[i][j - 1];
+                }
+            }
+        }
+        return arr[str1.length() - 1][str2.length() - 1];
+    }
+
+    public int max(int a, int b) {
+        return a > b ? a : b;
     }
 
 }
