@@ -5,15 +5,12 @@ import rohan.ds.MyList.ListNode;
 public class ListQue {
 
     public ListNode reverseList(ListNode head) {
-        if (head == null)
-            return null;
-        if (head.next == null)
-            return head;
+        if(head == null || head.next == null) return head;
         ListNode first = head;
         ListNode rest = head.next;
         // understand this 10->20->30->40
         // here it is like 10, 40->30->20
-        head = reverseList(rest);
+        head  = reverseList(rest);
         first.next.next = first;
         first.next = null;
         return head;
@@ -49,11 +46,11 @@ public class ListQue {
     public ListNode reversePairs(ListNode head) {
         if (head == null || head.next == null)
             return head;
-        ListNode newHead = head.next;
-        ListNode nextHead = head.next.next;
-        head.next.next = head;
-        head.next = reversePairs(nextHead);
-        return newHead;
+        ListNode first = head,second = head.next;
+        ListNode temp = reversePairs(second.next);
+        first.next.next = first;
+        first.next = temp;
+        return second;
     }
 
     public ListNode reverseK(ListNode head, int k) {
@@ -67,8 +64,7 @@ public class ListQue {
             p = c;
             c = n;
         }
-        if (c != null)
-            head.next = reverseK(c, temp);
+        head.next = reverseK(c, temp);
         return p;
     }
 

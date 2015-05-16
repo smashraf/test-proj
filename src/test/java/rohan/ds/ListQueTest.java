@@ -45,7 +45,7 @@ public class ListQueTest {
     
     @Test
     public void reverseKTest() {
-        l1.head = listQue.reverseK(l1.head, 2);
+        l1.head = listQue.reverseK(l1.head, 3);
         l1.printList();
     }
 
