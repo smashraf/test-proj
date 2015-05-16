@@ -30,5 +30,19 @@ public class StackQue {
         }
         return true;
     }
+    
+    public int[] findSpan(int [] arr) {
+        int[] spans = new int[arr.length];
+        int p;
+        Stack<Integer> stack = new Stack<>();
+        for(int i=0;i<arr.length;i++) {
+            while(!stack.isEmpty() && arr[i]>arr[stack.peek()]) stack.pop();
+            if(stack.isEmpty()) p = -1;
+            else p = stack.peek();
+            spans[i] = i-p;
+            stack.push(i);
+        }
+        return spans;
+    }
 
 }
