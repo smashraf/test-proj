@@ -23,4 +23,10 @@ public class StackQueTest {
         System.out.println(Arrays.toString(stackQue.findSpan(new int[] { 6, 3, 4, 5, 2, 7 })));
     }
 
+    @Test
+    public void findLargestRectangleTest() {
+        Assert.assertEquals(12, stackQue.findLargestRectangle(new int[] { 6, 2, 5, 4, 5, 1, 6 }));
+        Assert.assertEquals(14, stackQue.findLargestRectangle(new int[] { 6, 2, 5, 4, 5, 2, 6 }));
+    }
+
 }
