@@ -4,7 +4,7 @@ import rohan.ds.MyTree.TreeNode;
 
 public class DsQuestions {
 
-    // public static int count = 0;
+    public static int count = 0;
 
     public TreeNode getLca(TreeNode root, TreeNode n1, TreeNode n2) {
         if (root == null || n1 == null || n2 == null)
@@ -22,19 +22,27 @@ public class DsQuestions {
             return rightSide;
     }
 
-    public void getKthLargest(TreeNode root, int k, Integer count) {
+    public void getKthLargest(TreeNode root, int k) {
         if (root == null || count >= k)
             return;
 
-        getKthLargest(root.right, k, count);
+        getKthLargest(root.right, k);
         count++;
         if (k == count) {
             System.out.println(root);
             return;
         }
+        getKthLargest(root.left, k);
+    }
 
-        getKthLargest(root.left, k, count);
+    public boolean isBst(TreeNode root, int leftMax, int rightMin) {
+        if (root == null)
+            return true;
 
+        if (root.x < leftMax || root.x > rightMin)
+            return false;
+
+        return isBst(root.left, leftMax, root.x - 1) && isBst(root.right, root.x + 1, rightMin);
     }
 
 }

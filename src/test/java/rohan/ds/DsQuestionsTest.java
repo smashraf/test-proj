@@ -1,15 +1,16 @@
 package rohan.ds;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 public class DsQuestionsTest {
-    
+
     DsQuestions dsQuestions = new DsQuestions();
-    
+
     MyTree tree = new MyTree();
-    
+
     @Before
     public void setup() {
         tree.root = tree.insert(tree.root, 0);
@@ -23,20 +24,25 @@ public class DsQuestionsTest {
         tree.inorder(tree.root);
         System.out.println();
     }
-    
+
     @After
     public void tearApart() {
         tree = null;
     }
-    
+
     @Test
     public void getLcaTest() {
         System.out.println(dsQuestions.getLca(tree.root, tree.root.left, tree.root.right.right));
     }
-    
+
     @Test
     public void getKthLargestTest() {
-        dsQuestions.getKthLargest(tree.root, 2,new Integer(0));
+        dsQuestions.getKthLargest(tree.root, 2);
+    }
+
+    @Test
+    public void isBstTest() {
+        Assert.assertTrue(dsQuestions.isBst(tree.getRoot(), Integer.MIN_VALUE, Integer.MAX_VALUE));
     }
 
 }
