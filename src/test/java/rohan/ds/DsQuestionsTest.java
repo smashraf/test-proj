@@ -44,5 +44,10 @@ public class DsQuestionsTest {
     public void isBstTest() {
         Assert.assertTrue(dsQuestions.isBst(tree.getRoot(), Integer.MIN_VALUE, Integer.MAX_VALUE));
     }
+    
+    @Test
+    public void printRightViewTest() {
+        dsQuestions.printRightView(tree.root);
+    }
 
 }
