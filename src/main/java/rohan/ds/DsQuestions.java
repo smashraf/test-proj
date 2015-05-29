@@ -1,5 +1,8 @@
 package rohan.ds;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
+
 import rohan.ds.MyTree.TreeNode;
 
 public class DsQuestions {
@@ -42,7 +45,24 @@ public class DsQuestions {
         if (root.x < leftMax || root.x > rightMin)
             return false;
 
-        return isBst(root.left, leftMax, root.x - 1) && isBst(root.right, root.x + 1, rightMin);
+        return isBst(root.left, leftMax, root.x - 1)
+                && isBst(root.right, root.x + 1, rightMin);
+    }
+
+    public void printRightView(TreeNode root) {
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        if (root == null)
+            return;
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            TreeNode tn = queue.remove();
+            if (queue.isEmpty())
+                System.out.println(tn.x);
+            if (tn.left != null)
+                queue.add(tn.left);
+            if (tn.right != null)
+                queue.add(tn.right);
+        }
     }
 
 }

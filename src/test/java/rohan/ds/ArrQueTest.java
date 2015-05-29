@@ -58,6 +58,12 @@ public class ArrQueTest {
         arrQue.rotate(arr, s, e, d);
         Assert.assertArrayEquals(ans, arr);
     }
+    
+    @Test
+    public void spiralPrintTest() {
+        int arr[][] = {{1,2,3,4},{5,6,7,8},{9,10,11,12}};
+        arrQue.spiralPrint(3, 4, arr);
+    }
 
     public Object[] getTripletArray() {
         return new Object[] { new Object[] { new int[] { 1, 4, 45, 6, 10, 8 }, 22 },

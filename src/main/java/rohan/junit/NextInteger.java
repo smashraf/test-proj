@@ -4,9 +4,11 @@ import java.util.Stack;
 
 public class NextInteger {
 
-    Stack<Integer> stack = new Stack<>();
+    
 
     public int[] getNextInt(int[] arr) {
+        
+        Stack<Integer> stack = new Stack<>();
 
         int[] ans = new int[arr.length];
         if (arr.length < 2)

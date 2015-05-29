@@ -7,8 +7,8 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class GraphQue {
-
-    public int c = 0;
+    
+    public int c=0;
 
     public void dfs(Graph graph) {
         boolean visited[] = new boolean[graph.V];
@@ -68,8 +68,10 @@ public class GraphQue {
         while (!queue.isEmpty()) {
             int vertex = queue.remove();
             for (Entry<Integer, Double> entry : graph.adj[vertex].entrySet()) {
-                if (distance[vertex] + entry.getValue() < distance[entry.getKey()]) {
-                    distance[entry.getKey()] = distance[vertex] + entry.getValue();
+                if (distance[vertex] + entry.getValue() < distance[entry
+                        .getKey()]) {
+                    distance[entry.getKey()] = distance[vertex]
+                            + entry.getValue();
                     parent[entry.getKey()] = vertex;
                     queue.add(entry.getKey());
                 }
