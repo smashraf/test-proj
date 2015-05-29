@@ -11,6 +11,7 @@ public class TrieTest {
     public void testTrie() {
         trie.insert(trie, new char[] { 'b', 'y' });
         Assert.assertTrue(trie.search(trie, new char[] { 'b', 'y' }));
+        Assert.assertFalse(trie.search(trie, new char[] { 'b', 'y', 'e' }));
         trie.insert(trie, new char[] { 'b', 'y', 'e' });
         Assert.assertTrue(trie.search(trie, new char[] { 'b', 'y', 'e' }));
         Assert.assertFalse(trie.search(trie, new char[] { 'b', 'y', 't' }));
