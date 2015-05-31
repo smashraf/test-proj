@@ -1,5 +1,12 @@
 package rohan.test;
 
+import static junitparams.JUnitParamsRunner.$;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+
+import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 
 import org.junit.Assert;
@@ -7,8 +14,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import rohan.utils.string.MyStringUtils;
-import junitparams.JUnitParamsRunner;
-import static junitparams.JUnitParamsRunner.$;
 
 @RunWith(JUnitParamsRunner.class)
 public class MyStringUtilsTest {
@@ -90,22 +95,89 @@ public class MyStringUtilsTest {
         System.out.println(myStringUtils.checkInterleaving("AB", "CD", "ACBD"));
         System.out.println(myStringUtils.checkInterleaving("AB", "CD", "ADBC"));
     }
-    
+
     @Test
     public void printAllPermsLexigoraphicallyTest() {
         myStringUtils.printAllPermsLexigoraphically("ABC".toCharArray());
     }
-    
+
     @Test
     public void longestCommonSubstringTest() {
         System.out.println(myStringUtils.longestCommonSubstring("GEEKSFORGEEKS", "FEWGEEKS"));
     }
-    
+
     @Test
     public void longestCommonSubseqTest() {
         System.out.println(myStringUtils.longestCommonSubseq("ABCA", "BDCA"));
         System.out.println(myStringUtils.longestPalindronicSubseq("ABBAC", 0, 0));
         System.out.println(myStringUtils.longestPalindronicSubseqRec("ABBAC", 0, 4));
+    }
+
+    @Test
+    public void printWordsTest() {
+        LinkedList<String> list = new LinkedList<>();
+        list.add("utensilsoon");
+        list.add("soonsoon");
+        list.add("abcdef");
+        list.add("suabb");
+        String a = "soon";
+        myStringUtils.printWords(list, a);
+    }
+
+    @Test
+    public void reverseWordsTest() {
+        myStringUtils.reverseWords("I love india".toCharArray());
+    }
+
+    @Test
+    public void permutationsTest() {
+        myStringUtils.permutations("ABC".toCharArray(), 0);
+    }
+
+    @Test
+    public void printAnagramsTogetherTest() {
+        String[] words = { "dog", "cat", "tac", "act", "god" };
+        myStringUtils.printAnagramsTogether(words);
+    }
+
+    @Test
+    public void printCombosTest() {
+        Map<Character, String> map = new HashMap<>();
+        map.put('0', "");
+        map.put('1', "ABC");
+        map.put('2', "DEF");
+        map.put('3', "GHI");
+        map.put('4', "JKL");
+        map.put('5', "MNO");
+        map.put('6', "PQRS");
+        map.put('7', "TUV");
+        map.put('8', "WX");
+        map.put('9', "YZ");
+        char[] arr = new char[3];
+        myStringUtils.printCombos(new char[] { '2', '3', '4' }, 0, arr, 0, map);
+
+    }
+
+    @Test
+    public void printPossibleTest() {
+        char[] arr = new char[20];
+        myStringUtils.printPossible("ABCD".toCharArray(), 0, arr, 0);
+    }
+    
+    @Test
+    public void getMaxEqualHalfSubStringTest() {
+        myStringUtils.getMaxEqualHalfSubString("1538023".toCharArray());
+        myStringUtils.getMaxEqualHalfSubString("123123".toCharArray());
+        myStringUtils.getMaxEqualHalfSubString("15".toCharArray());
+        myStringUtils.getMaxEqualHalfSubString("11".toCharArray());
+    }
+    
+    @Test
+    public void getKUniquesTest() {
+        myStringUtils.getKUniques("aabbcc".toCharArray(), 1);
+        myStringUtils.getKUniques("aabbcc".toCharArray(), 3);
+        myStringUtils.getKUniques("aabbcc".toCharArray(), 2);
+        myStringUtils.getKUniques("aabacbebebe".toCharArray(), 3);
     }
 
 }

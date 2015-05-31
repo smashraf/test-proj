@@ -1,6 +1,10 @@
 package rohan.utils.string;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
 
 import rohan.ds.Pair;
 
@@ -257,6 +261,204 @@ public class MyStringUtils {
 
     public int max(int a, int b) {
         return a > b ? a : b;
+    }
+
+    // Print all words
+    public void printWords(LinkedList<String> str, String a) {
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        for (String s : str) {
+            int i = 0;
+            while (i < a.length()) {
+                if (map.get(a.charAt(i)) == null)
+                    map.put(a.charAt(i), 1);
+                else
+                    map.put(a.charAt(i), map.get(a.charAt(i)) + 1);
+                i++;
+            }
+            int count = 0;
+            int j = 0;
+            while (j < s.length()) {
+                if (count == a.length()) {
+                    System.out.println(s);
+                    break;
+                }
+                if (map.containsKey(s.charAt(j)) && map.get(s.charAt(j)) != 0) {
+                    map.put(s.charAt(j), map.get(s.charAt(j)) - 1);
+                    count++;
+                }
+                j++;
+            }
+
+        }
+    }
+
+    public void reverseWords(char[] str) {
+
+        StringBuilder s = new StringBuilder();
+        s.append(str);
+        s.reverse();
+        str = s.toString().toCharArray();
+        int start = 0;
+        for (int i = 0; i < str.length; i++) {
+            if (str[i] == ' ') {
+                reverse(str, start, i - 1);
+                start = i + 1;
+            }
+            if (i == str.length - 1) {
+                reverse(str, start, i);
+            }
+        }
+        System.out.println(str);
+    }
+
+    // print all permutations
+    public void permutations(char[] str, int i) {
+        if (i == str.length) {
+            System.out.println(str);
+        }
+        for (int j = i; j < str.length; j++) {
+            swap(str, i, j);
+            permutations(str, i + 1);
+            swap(str, i, j);
+        }
+    }
+
+    // interleaving of two strings
+
+    public void reverse(char[] str, int start, int end) {
+        if (start > end)
+            return;
+        char temp = str[start];
+        str[start] = str[end];
+        str[end] = temp;
+        reverse(str, ++start, --end);
+    }
+
+    public void printAnagramsTogether(String[] inputWords) {
+        Word[] words = new Word[inputWords.length];
+        for (int i = 0; i < inputWords.length; i++) {
+            Word wd = new Word();
+            char[] st = inputWords[i].toCharArray();
+            Arrays.sort(st);
+            wd.str = String.valueOf(st);
+            wd.index = i;
+            words[i] = wd;
+        }
+
+        Arrays.sort(words, new Comparator<Word>() {
+            @Override
+            public int compare(Word o1, Word o2) {
+                return o1.str.compareTo(o2.str);
+            }
+        });
+
+        for (Word wd : words) {
+            System.out.println(inputWords[wd.index]);
+        }
+
+    }
+
+    public class Word {
+        public String str;
+        public int index;
+
+        @Override
+        public String toString() {
+            return "Word [str=" + str + ", index=" + index + "]";
+        }
+
+    }
+
+    public void printCombos(char[] input, int index, char[] arr, int k, Map<Character, String> map) {
+        if (k >= input.length) {
+            System.out.println(arr);
+            return;
+        }
+        for (int i = 0; i < map.get(input[index]).length(); i++) {
+            arr[k] = map.get(input[index]).charAt(i);
+            printCombos(input, index + 1, arr, k + 1, map);
+        }
+    }
+
+    public void printPossible(char[] str, int index, char[] arr, int k) {
+        if (index >= str.length) {
+            System.out.println(arr);
+            return;
+        } else {
+            arr[k] = str[index];
+            printPossible(str, index + 1, arr, k + 1);
+            if (k - 1 >= 0 && arr[k - 1] != ' ') {
+                arr[k] = ' ';
+                printPossible(str, index, arr, k + 1);
+            }
+        }
+
+    }
+
+    public void getMaxEqualHalfSubString(char[] str) {
+        int[][] arr = new int[str.length][str.length];
+        for (int i = 0; i < str.length; i++)
+            for (int j = i; j < str.length; j++)
+                if (j == i)
+                    arr[i][j] = str[i] - '0';
+                else
+                    arr[i][j] = arr[i][j - 1] + str[j] - '0';
+        int max = 0;
+        for (int i = 0; i < str.length; i++) {
+            for (int j = i + 1; j < str.length; j = j + 2) {
+                int totalSum = 0, leftSum = 0;
+                totalSum = arr[i][j];
+                leftSum = arr[i][i + (j - i) / 2];
+                if (leftSum * 2 == totalSum && max < j - i)
+                    max = j - i + 1;
+            }
+        }
+        System.out.println(max);
+    }
+
+    public void getKUniques(char[] str, int k) {
+        int i = 0;
+        int[] map = new int[26];
+        int u = 0;
+        int localStart = 0, localEnd = 0, globalStart = 0, globalEnd = 0;
+        for (int j = 0; j < 26; j++)
+            map[j] = 0;
+        for (int j = 0; j < str.length; j++) {
+            if (map[str[j] - 'a'] == 0) {
+                u++;
+                map[str[j] - 'a']++;
+            }
+            map[str[j] - 'a']++;
+        }
+        if (u < k) {
+            System.out.println("Less than " + k + "uniques");
+            return;
+        }
+        for (int j = 0; j < 26; j++)
+            map[j] = 0;
+        while (i < str.length) {
+            map[str[i]-'a']++;
+            localEnd++;
+            while(!isValid(map,k)) {
+                map[str[localStart]-'a']--;
+                localStart++;
+            }
+            if(localEnd-localStart>globalEnd-globalStart) {
+                globalEnd = localEnd;
+                globalStart = localStart;
+            }
+            i++;
+        }
+        System.out.println(" " + globalStart + " " + globalEnd);
+    }
+    
+    private boolean isValid(int[] map, int k) {
+        int c=0;
+        for(int i=0;i<26;i++) {
+            if(map[i]>0)c++;
+        }
+        return k>=c;
     }
 
 }
