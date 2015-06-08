@@ -88,5 +88,13 @@ public class DpQueTest {
         Integer a[] = {10, -3, -4, 7, 6, 5, -4, -1};
         System.out.println(dpQue.maxCircularSubArray(a));
     }
+    
+    @Test
+    public void getMaxAsTest() {
+        dpQue.getMaxAs(7);
+        dpQue.getMaxAs(20);
+        dpQue.getMaxAs(8);
+        dpQue.getMaxAs(11);
+    }
 
 }

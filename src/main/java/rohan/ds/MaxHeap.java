@@ -1,5 +1,8 @@
 package rohan.ds;
 
+import java.util.Arrays;
+import java.util.PriorityQueue;
+
 public class MaxHeap {
 
     public int[] arr;
@@ -43,10 +46,23 @@ public class MaxHeap {
     public void insert(int x) {
         arr[size] = x;
         size++;
-        for (int i = getParent(size-1); i >= 0;) {
+        for (int i = getParent(size - 1); i >= 0;) {
             heapify(i);
             i = getParent(i);
         }
     }
-    
+
+    int minRopeLength(int[] arr) {
+        PriorityQueue<Integer> queue = new PriorityQueue<Integer>();
+        Arrays.sort(arr);
+        for (int i = 0; i < arr.length; i++) {
+            queue.add(arr[i]);
+        }
+        while (queue.size() != 1) {
+            int el1 = queue.remove();
+            int el2 = queue.remove();
+            queue.add(el1 + el2);
+        }
+        return queue.peek();
+    }
 }

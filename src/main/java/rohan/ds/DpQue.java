@@ -149,7 +149,22 @@ public class DpQue {
             arr[i] = -arr[i];
         }
         int cand2 = totalSum + kadane(arr);
-        return max(cand1,cand2);
+        return max(cand1, cand2);
+    }
+
+    public int getMaxAs(int N) {
+        if (N <= 6)
+            return N;
+        int max = N;
+        int local = 0;
+        for (int i = 1; i <= N; i++) {
+            local = i + i * (N - 2 - i);
+            if (max < local)
+                max = local;
+
+        }
+        System.out.println(max);
+        return max;
     }
 
 }

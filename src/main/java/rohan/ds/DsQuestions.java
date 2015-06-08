@@ -45,8 +45,7 @@ public class DsQuestions {
         if (root.x < leftMax || root.x > rightMin)
             return false;
 
-        return isBst(root.left, leftMax, root.x - 1)
-                && isBst(root.right, root.x + 1, rightMin);
+        return isBst(root.left, leftMax, root.x - 1) && isBst(root.right, root.x + 1, rightMin);
     }
 
     public void printRightView(TreeNode root) {
@@ -63,6 +62,62 @@ public class DsQuestions {
             if (tn.right != null)
                 queue.add(tn.right);
         }
+    }
+
+    public void printKDist(TreeNode root, TreeNode target, int k) {
+        if (root == null || target == null)
+            return;
+        printChildNodes(target, k);
+        printKDistUtil(root, target, k);
+    }
+
+    public void printKDistUtil(TreeNode root, TreeNode target, int k) {
+        if (root == null)
+            return;
+        int d1 = search(root.left, target, 0);
+        int d2 = search(root.right, target, 0);
+        int d3 = search(root, target, 0);
+        if (d1 != -1)
+            printChildNodes(root.right, k - d1 - 2);
+        if (d2 != -1)
+            printChildNodes(root.left, k - d2 - 2);
+        if (d3 == k)
+            System.out.println(root.x);
+        printKDistUtil(root.left, target, k);
+        printKDistUtil(root.right, target, k);
+    }
+
+    public int search(TreeNode root, TreeNode target, int d) {
+        if (root == target)
+            return d;
+        if (root == null)
+            return -1;
+        return max(search(root.left, target, d + 1), search(root.right, target, d + 1));
+    }
+
+    public void printChildNodes(TreeNode root, int k) {
+        if (root == null || k < 0)
+            return;
+        else if (k == 0) {
+            System.out.println(root.x);
+            return;
+        } else {
+            printChildNodes(root.left, k - 1);
+            printChildNodes(root.right, k - 1);
+        }
+    }
+
+    private int max(int a, int b) {
+        return a > b ? a : b;
+    }
+
+    public int[] getDiagonalSum(TreeNode root, int k, int[] sum) {
+        if (root == null)
+            return sum;
+        sum[k] += root.x;
+        sum = getDiagonalSum(root.right, k, sum);
+        sum = getDiagonalSum(root.left, k + 1, sum);
+        return sum;
     }
 
 }
