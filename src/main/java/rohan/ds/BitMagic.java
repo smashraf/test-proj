@@ -40,4 +40,17 @@ public class BitMagic {
         }
         return num;
     }
+    
+    public int getNthMagicNumber(int n) {
+        int ans = 0;
+        int c=1;
+        while(n!=0) {
+            if((n & 1) == 1) {
+                ans += Math.pow(5,c);
+            }
+            c++;
+            n >>= 1;
+        }
+        return ans;
+    }
 }

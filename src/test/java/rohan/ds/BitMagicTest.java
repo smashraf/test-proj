@@ -26,4 +26,11 @@ public class BitMagicTest {
     public void getOddOccuringTest() {
         Assert.assertEquals(1,bitMagic.getOddOccuring(new int []{1,2,2}));
     }
+    
+    @Test
+    public void getNthMagicNumberTest() {
+        Assert.assertTrue(bitMagic.getNthMagicNumber(3)==30);
+        Assert.assertTrue(bitMagic.getNthMagicNumber(5)==130);
+        Assert.assertTrue(bitMagic.getNthMagicNumber(6)==150);
+    }
 }

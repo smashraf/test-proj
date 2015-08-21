@@ -67,5 +67,4 @@ public class ListQue {
         head.next = reverseK(c, temp);
         return p;
     }
-
 }

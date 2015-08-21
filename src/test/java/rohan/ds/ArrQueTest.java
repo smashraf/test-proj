@@ -101,8 +101,8 @@ public class ArrQueTest {
 
     @Test
     public void minJumpsTest() {
-        int[] arr = { 1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9 };
-        System.out.println(arrQue.minJumps(arr, 1, 0));
+        int[] arr = {1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9};//{1, 3, 6, 3, 2, 3, 6, 8, 9, 5};
+        System.out.println(arrQue.minJumps(arr, 0));
     }
 
     @Test

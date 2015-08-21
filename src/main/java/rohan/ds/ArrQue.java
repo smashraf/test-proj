@@ -1,12 +1,12 @@
 package rohan.ds;
 
-import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Scanner;
 import java.util.Set;
 
 public class ArrQue {
@@ -115,47 +115,38 @@ public class ArrQue {
         arr[i] = arr[j];
         arr[j] = temp;
     }
-    
+
     public void spiralPrint(int m, int n, int a[][]) {
         int i, k = 0, l = 0;
-        
-       
-     
-        while (k < m && l < n)
-        {
+
+        while (k < m && l < n) {
             /* Print the first row from the remaining rows */
-            for (i = l; i < n; ++i)
-            {
-                System.out.print(a[k][i]+" ");
+            for (i = l; i < n; ++i) {
+                System.out.print(a[k][i] + " ");
             }
             k++;
-     
+
             /* Print the last column from the remaining columns */
-            for (i = k; i < m; ++i)
-            {
-                System.out.print(a[i][n-1]+" " );
+            for (i = k; i < m; ++i) {
+                System.out.print(a[i][n - 1] + " ");
             }
             n--;
-     
+
             /* Print the last row from the remaining rows */
-            if ( k < m)
-            {
-                for (i = n-1; i >= l; --i)
-                {
-                    System.out.print(a[m-1][i]+" ");
+            if (k < m) {
+                for (i = n - 1; i >= l; --i) {
+                    System.out.print(a[m - 1][i] + " ");
                 }
                 m--;
             }
-     
+
             /* Print the first column from the remaining columns */
-            if (l < n)
-            {
-                for (i = m-1; i >= k; --i)
-                {
-                    System.out.print(a[i][l]+" ");
+            if (l < n) {
+                for (i = m - 1; i >= k; --i) {
+                    System.out.print(a[i][l] + " ");
                 }
-                l++;    
-            }        
+                l++;
+            }
         }
     }
 
@@ -194,6 +185,7 @@ public class ArrQue {
                 k++;
             }
         }
+
         Arrays.sort(aux, new Comparator<PairSum>() {
             @Override
             public int compare(PairSum o1, PairSum o2) {
@@ -246,23 +238,6 @@ public class ArrQue {
             }
         }
         return mat[arr.length - 1][n];
-    }
-
-    public int minJumps(int[] arr, int index, int c) {
-        if (index >= arr.length - 1)
-            return c;
-        if (index == 0)
-            return c + 1;
-        else {
-            int min = Integer.MAX_VALUE;
-            for (int k = 0; k < index; k++) {
-                if (index - k <= arr[k] && min > index - k) {
-                    min = index - k;
-                }
-            }
-            return c + min;
-        }
-
     }
 
     public void getLISSmart(int[] arr) {
@@ -472,5 +447,65 @@ public class ArrQue {
             qSort(arr, p + 1, end);
         }
     }
+
+    public static void Sort(Pair[] p) {
+        Pair[] result = new Pair[p.length];
+        Arrays.sort(p, new Comparator<Pair>() {
+            @Override
+            public int compare(Pair o1, Pair o2) {
+                return Integer.compare(o2.first, o1.first);
+            }
+        });
+        int max_y = Integer.MIN_VALUE;
+        int j = 0;
+        for (int i = 0; i < p.length; i++) {
+            if (p[i].second > max_y) {
+                result[j++] = p[i];
+                max_y = p[i].second;
+            }
+        }
+        for (int i = 0; i < j; i++) {
+            System.out.println(result[i].first);
+            System.out.println(result[i].second);
+        }
+    }
+
+    public int minJumps(int[] arr, int i) {
+        if (i == arr.length - 1)
+            return 0;
+        else if (arr[i] == 0)
+            return Integer.MAX_VALUE;
+        else {
+            int min = Integer.MAX_VALUE;
+            for (int k = i + 1; k < arr.length && k <= arr[i] + i; k++) {
+                int jumps = minJumps(arr, k);
+                if (jumps + 1 < min) {
+                    min = jumps + 1;
+                }
+            }
+            return min;
+        }
+    }
+    
+    public void possibleArrays(int[] A, int[] B, int[] C, int i, int j, int k, boolean flag ) {
+        if(flag) {
+            for(int m=i;m<A.length;m++) {
+                if(C[k]<A[k]) C[k+1] = A[k];
+                possibleArrays(A,B,C,i+1,j,k+1,!flag);
+            }
+        }
+    }
+    
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        String s1 = s.next();
+        System.out.println(s1);
+        String s2 = s.next();
+        System.out.println(s2);
+    }
+    
+    
+    
+    
 
 }

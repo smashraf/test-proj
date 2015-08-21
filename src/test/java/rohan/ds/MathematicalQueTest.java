@@ -19,6 +19,8 @@ public class MathematicalQueTest {
         Assert.assertTrue(mathematicalQue.isLucky(7, 2));
         Assert.assertFalse(mathematicalQue.isLucky(9, 2));
         Assert.assertFalse(mathematicalQue.isLucky(8, 2));
+        
+        
     }
 
 }
